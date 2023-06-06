@@ -2,6 +2,8 @@
 # Link tutorials in this project
 ## 1. Link github install Jenkins
 https://github.com/HoangGuruu/DevOps-Command-Line-Install-Jenkins
+### Use this link to learn
+https://www.jenkins.io/doc/book/installing/linux/#debianubuntu
 
 # Link youtube
 

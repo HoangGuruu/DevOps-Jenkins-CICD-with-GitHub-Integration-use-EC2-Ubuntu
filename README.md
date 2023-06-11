@@ -9,8 +9,9 @@
 https://github.com/HoangGuruu/DevOps-Command-Line-Install-Jenkins
 ### Use this link to learn
 https://www.jenkins.io/doc/book/installing/linux/#debianubuntu
+## 3. Link Docker Documentation
 
-## 3. Link youtube
+## 4. Link youtube
 
 # II. All Script and Step i use in this project
 
@@ -85,8 +86,70 @@ cd /var/lib/jenkins/workspace/<nameofyourapp>
 ls
 ```
 - Install anything the app need
-- Open port need , example 8000
-- 
+```
+sudo apt install nodejs
+sudo apt install npm
+```
+```
+sudo npm install
+```
+- Run app
+```
+node app.js
+```
+- Open port need in security group , example 8000
+- Then check ip:8000 in another tab ( ip will not run if we interrupt node app.js )
+## 7. Docker 
+```
+cd /var/lib/jenkins/workspace/<nameofyourapp>
+ls 
+# if exist
+sudo rm Dockerfile
+```
+- In stall Docker
+```
+sudo apt install docker.io
+```
+```
+nano Dockerfile
+```
+- Then add in Docker file
+```
+FROM node:12.2.0-alpine
+WORDIR app
+COPY . .
+RUN npm install
+EXPOSE 8000
+CMD ["node","app.js"]
+```
+```
+sudo usermod -a -G docker $USER
+sudo reboot
+cd /var/lib/jenkins/workspace/todo-node-app
+docker build . -t node-app-todo
+```
+
+## 8. Build step in Jenkins - Excute shell
+```
+docker build . -t node-app-todo
+docker run -d -name node-todo-app -p 8000:8000 todo-node-app
+```
+```
+sudo chmode 777 /var/lib/jenkins/workspace/todo-node-app
+sudo usermod -a -G docker jenkins
+sudo systemctl restart jenkins
+# And sign in jenkins
+```
+
+## 9. Webhook Github with Jenkins to start build when push code 
+- Add ip port in webhook
+- Change in config jenkins >> Webhook
+- Change in excute shell of jenkins 
+```
+docker run -d -name node-todo-app -p 8000:8000 todo-node-app1
+# to different
+```
+
 ### We can also use this tutorial to install Jenkins in Amazon Linux 2 
 https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/#launching-an-amazon-ec2-instance
 ## 3. 

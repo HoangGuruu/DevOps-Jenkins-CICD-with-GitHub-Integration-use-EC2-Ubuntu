@@ -17,7 +17,7 @@ https://www.jenkins.io/doc/book/installing/linux/#debianubuntu
 
 ## 1. Create AWS EC2 instance - Ubuntu
 - Allow 22, 80 , 443
-- Allow 8080 : Jenkins with my IP
+- Allow 8080 : Jenkins with my IP / if with my IP then github will haven't access
 - Allow 8000
 ## 2. Install Jenkin
 ```
@@ -130,26 +130,45 @@ docker build . -t node-app-todo
 docker run -d --name node-todo-app -p 8000:8000 todo-node-app
 ```
 - Then check
+- And kill
+```
+docker ps
+docker kill {ID process}
+```
 
 ## 8. Build step in Jenkins - Excute shell
 ```
 docker build . -t node-app-todo
 docker run -d --name node-todo-app -p 8000:8000 todo-node-app
+### remember change --name : ... if have user had it in public
 ```
 ```
-sudo chmode 777 /var/lib/jenkins/workspace/todo-node-app
+sudo chmod 777 /var/lib/jenkins/workspace/todo-node-app
 sudo usermod -a -G docker jenkins
 sudo systemctl restart jenkins
 # And sign in jenkins
 ```
 
 ## 9. Webhook Github with Jenkins to start build when push code 
-- Add ip port in webhook
+- Manage Jenkin -> Plugin Manager - > available plugins -> Type : github integration -> install without restart
+- Add ip port ( payload URL in webhook : {ip:8080/github-webhook/}
+  + In repository -> setting > webhook
+  + Choose type application/json
+  + Choose just the push event
 - Change in config jenkins >> Webhook
-- Change in excute shell of jenkins 
+  + Build trigger : GitHub Hook TRIGGER FOR gitsCM POLLING
+- Change in excute shell of jenkins : IF NECCESSARY
 ```
 docker run -d -name node-todo-app -p 8000:8000 todo-node-app1
 # to different
+```
+
+And change EXCUTE Shell : need kill and remove that container before build and run again
+```
+docker kill demo-app-1
+docker rm demo-app-1
+docker build . -t demo-app
+docker run -d --name demo-app1 -p 8000:8000 todo-node-app
 ```
 
 ### We can also use this tutorial to install Jenkins in Amazon Linux 2 

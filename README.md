@@ -127,12 +127,14 @@ sudo usermod -a -G docker $USER
 sudo reboot
 cd /var/lib/jenkins/workspace/todo-node-app
 docker build . -t node-app-todo
+docker run -d --name node-todo-app -p 8000:8000 todo-node-app
 ```
+- Then check
 
 ## 8. Build step in Jenkins - Excute shell
 ```
 docker build . -t node-app-todo
-docker run -d -name node-todo-app -p 8000:8000 todo-node-app
+docker run -d --name node-todo-app -p 8000:8000 todo-node-app
 ```
 ```
 sudo chmode 777 /var/lib/jenkins/workspace/todo-node-app

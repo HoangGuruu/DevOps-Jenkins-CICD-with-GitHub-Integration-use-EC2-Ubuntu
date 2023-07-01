@@ -18,7 +18,7 @@ https://www.jenkins.io/doc/book/installing/linux/#debianubuntu
 ## 1. Create AWS EC2 instance - Ubuntu
 - Allow 22, 80 , 443
 - Allow 8080 : Jenkins with my IP
-
+- Allow 8000
 ## 2. Install Jenkin
 ```
 sudo apt update

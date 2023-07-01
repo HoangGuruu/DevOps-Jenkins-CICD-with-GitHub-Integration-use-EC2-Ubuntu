@@ -1,5 +1,5 @@
 ![image](https://github.com/HoangGuruu/DevOps-Jenkins-CICD-with-GitHub-Integration-use-EC2-Ubuntu/assets/111829092/3b4e1136-5c17-40fb-a0f0-7a3a441ef496)
-# I. Link tutorials in this project
+# I. Link [tutorials](https://www.youtube.com/watch?v=nplH3BzKHPk&list=PL16dpeBne9TC6FWqB6kc7a5CiIcS2vXiX&index=54&t=5784s) in this project
 ## 1. Tool for this project
 ### EC2 Ubuntu
 ### Jenkins
